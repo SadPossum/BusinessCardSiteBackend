@@ -8,17 +8,20 @@ namespace BusinessCardSiteBackendDemo.Controllers
     [ApiController]
     public class ReviewController : ControllerBase
     {
-        private readonly ReviewRepository _repository;
+        private readonly IReviewRepository _repository;
+        private readonly ILogger<ReviewController> _logger;
 
-        public ReviewController(ReviewRepository repository)
+        public ReviewController(IReviewRepository repository, ILogger<ReviewController> logger)
         {
             _repository = repository;
+            _logger = logger;
         }
 
         // GET review
         [HttpGet]
         public ActionResult<IEnumerable<Review>> Get()
         {
+            _logger.LogInformation("Retrieving all reviews");
             return Ok(_repository.GetAllReviews());
         }
 
@@ -26,6 +29,7 @@ namespace BusinessCardSiteBackendDemo.Controllers
         [HttpGet("{id}")]
         public ActionResult<Review> Get(int id)
         {
+            _logger.LogInformation("Retrieving review with id {0}", id);
             var review = _repository.GetReview(id);
             if (review == null)
             {
@@ -39,6 +43,7 @@ namespace BusinessCardSiteBackendDemo.Controllers
         [HttpPost]
         public ActionResult<int> Post([FromBody] Review review)
         {
+            _logger.LogInformation("Adding review");
             var reviewId = _repository.AddReview(review);
             return CreatedAtAction(nameof(Get), new { id = reviewId }, reviewId);
         }
@@ -47,6 +52,7 @@ namespace BusinessCardSiteBackendDemo.Controllers
         [HttpPut("{id}")]
         public ActionResult<int> Put(int id, [FromBody] Review review)
         {
+            _logger.LogInformation("Updating review with id {0}", id);
             var existingReview = _repository.GetReview(id);
             if (existingReview == null)
             {
@@ -62,6 +68,7 @@ namespace BusinessCardSiteBackendDemo.Controllers
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
+            _logger.LogInformation("Deleting review with id {0}", id);
             var review = _repository.GetReview(id);
             if (review == null)
             {

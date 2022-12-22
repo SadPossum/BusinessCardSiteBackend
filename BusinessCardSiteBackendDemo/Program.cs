@@ -1,15 +1,18 @@
 using BusinessCardSiteBackendDemo.Data;
 using BusinessCardSiteBackendDemo.Repositories;
 using Microsoft.EntityFrameworkCore;
+using NLog.Web;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Host.UseNLog();
 
 // Add builder.Services to the container.
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.
                        GetConnectionString("DefaultConnection")));
 
-builder.Services.AddScoped<ReviewRepository>();
+builder.Services.AddScoped<IReviewRepository, ReviewRepository>();
 builder.Services.AddScoped<ApplicationDbContext>();
 
 builder.Services.AddControllers();
