@@ -4,10 +4,10 @@ namespace BusinessCardSiteBackendDemo.Repositories
 {
     public interface IReviewRepository
     {
-        Review GetReview(int id);
-        IEnumerable<Review> GetAllReviews();
-        int AddReview(Review review);
-        int UpdateReview(Review review);
-        void DeleteReview(int id);
+        Task<Review?> GetReviewAsync(int id);
+        Task<IEnumerable<Review?>> GetAllReviewsAsync();
+        Task<int> AddReviewAsync(Review review);
+        Task<int> UpdateReviewAsync(Review review);
+        Task DeleteReviewAsync(int id);
     }
 }

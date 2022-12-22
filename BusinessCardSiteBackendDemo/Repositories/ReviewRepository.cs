@@ -15,42 +15,42 @@ namespace BusinessCardSiteBackendDemo.Repositories
             _logger = logger;
         }
 
-        public Review GetReview(int id)
+        public async Task<Review?> GetReviewAsync(int id)
         {
             _logger.LogInformation("Retrieving review with id {0}", id);
-            return _context.Reviews.Find(id);
+            return await _context.Reviews.FindAsync(id);
         }
 
-        public IEnumerable<Review> GetAllReviews()
+        public async Task<IEnumerable<Review?>> GetAllReviewsAsync()
         {
             _logger.LogInformation("Retrieving all reviews");
-            return _context.Reviews.ToList();
+            return await _context.Reviews.ToListAsync();
         }
 
-        public int AddReview(Review review)
+        public async Task<int> AddReviewAsync(Review review)
         {
             _logger.LogInformation("Adding review");
             _context.Reviews.Add(review);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
             return review.Id;
         }
 
-        public int UpdateReview(Review review)
+        public async Task<int> UpdateReviewAsync(Review review)
         {
             _logger.LogInformation("Updating review with id {0}", review.Id);
             _context.Entry(review).State = EntityState.Modified;
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
             return review.Id;
         }
 
-        public void DeleteReview(int id)
+        public async Task DeleteReviewAsync(int id)
         {
             _logger.LogInformation("Deleting review with id {0}", id);
-            var review = _context.Reviews.Find(id);
+            var review = await _context.Reviews.FindAsync(id);
             if (review != null)
             {
                 _context.Reviews.Remove(review);
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
             }
         }
     }
