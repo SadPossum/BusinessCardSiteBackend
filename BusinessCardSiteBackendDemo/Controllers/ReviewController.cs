@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BusinessCardSiteBackendDemo.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class ReviewController : ControllerBase
     {
@@ -15,14 +15,14 @@ namespace BusinessCardSiteBackendDemo.Controllers
             _repository = repository;
         }
 
-        // GET api/review
+        // GET review
         [HttpGet]
         public ActionResult<IEnumerable<Review>> Get()
         {
             return Ok(_repository.GetAllReviews());
         }
 
-        // GET api/review/5
+        // GET review/5
         [HttpGet("{id}")]
         public ActionResult<Review> Get(int id)
         {
@@ -35,7 +35,7 @@ namespace BusinessCardSiteBackendDemo.Controllers
             return Ok(review);
         }
 
-        // POST api/review
+        // POST review
         [HttpPost]
         public ActionResult<int> Post([FromBody] Review review)
         {
@@ -43,7 +43,7 @@ namespace BusinessCardSiteBackendDemo.Controllers
             return CreatedAtAction(nameof(Get), new { id = reviewId }, reviewId);
         }
 
-        // PUT api/review/5
+        // PUT review/5
         [HttpPut("{id}")]
         public ActionResult<int> Put(int id, [FromBody] Review review)
         {
@@ -58,7 +58,7 @@ namespace BusinessCardSiteBackendDemo.Controllers
             return Ok(reviewId);
         }
 
-        // DELETE api/review/5
+        // DELETE review/5
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
