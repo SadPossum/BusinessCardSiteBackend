@@ -12,6 +12,8 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.
                        GetConnectionString("DefaultConnection")));
 
+builder.Services.AddCors();
+
 builder.Services.AddScoped<IReviewRepository, ReviewRepository>();
 builder.Services.AddScoped<ApplicationDbContext>();
 
@@ -23,9 +25,13 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
+    app.UseCors(p => p.AllowAnyOrigin()
+    .AllowAnyHeader()
+    .AllowAnyMethod()
+    .WithExposedHeaders("Content-Disposition"));
 }
 
-app.UseHttpsRedirection();
+// app.UseHttpsRedirection();
 
 app.UseRouting();
 
