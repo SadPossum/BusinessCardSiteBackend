@@ -12,6 +12,8 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.
                        GetConnectionString("DefaultConnection")));
 
+builder.Services.AddCors();
+
 builder.Services.AddScoped<IReviewRepository, ReviewRepository>();
 builder.Services.AddScoped<ApplicationDbContext>();
 
@@ -21,7 +23,7 @@ var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
-    app.UseDeveloperExceptionPage();
+  app.UseDeveloperExceptionPage();
 }
 
 app.UseCors(p => p.AllowAnyOrigin()
@@ -37,7 +39,7 @@ app.UseAuthorization();
 
 app.UseEndpoints(endpoints =>
 {
-    endpoints.MapControllers();
+  endpoints.MapControllers();
 });
 
 app.Run();
