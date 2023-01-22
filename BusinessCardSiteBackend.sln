@@ -1,9 +1,9 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.32912.340
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessCardSiteBackendDemo", "BusinessCardSiteBackendDemo\BusinessCardSiteBackendDemo.csproj", "{3C6017DD-5905-4D4B-8247-3C38EFF685C3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessCardSiteBackend", "BusinessCardSiteBackend\BusinessCardSiteBackend.csproj", "{3C6017DD-5905-4D4B-8247-3C38EFF685C3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,6 +1,6 @@
-﻿using BusinessCardSiteBackendDemo.Models;
+using BusinessCardSiteBackend.Models;
 
-namespace BusinessCardSiteBackendDemo.Repositories
+namespace BusinessCardSiteBackend.Repositories
 {
     public interface IReviewRepository
     {

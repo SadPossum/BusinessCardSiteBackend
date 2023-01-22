@@ -1,6 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations;
 
-namespace BusinessCardSiteBackendDemo.Models
+namespace BusinessCardSiteBackend.Models
 {
     public class Review
     {

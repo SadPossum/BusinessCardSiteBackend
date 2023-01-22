@@ -1,6 +1,6 @@
-# BusinessCardSiteBackendDemo
+# BusinessCardSiteBackend
 
-BusinessCardSiteBackendDemo is a web application that allows users to write reviews about you. The application has a REST API that provides CRUD (create, read, update, delete) functionality for reviews.
+BusinessCardSiteBackend is a web application that allows users to write reviews about you. The application has a REST API that provides CRUD (create, read, update, delete) functionality for reviews.
 
 ## Prerequisites
 Before you begin, make sure you have the following prerequisites installed on your machine:
@@ -13,11 +13,11 @@ To install the application, follow these steps:
 
 1. Clone the repository:
 ```sh
-git clone https://github.com/YOUR_USERNAME/BusinessCardSiteBackendDemo.git
+git clone https://github.com/YOUR_USERNAME/BusinessCardSiteBackend.git
 ```
 2. Navigate to the project directory:
 ```sh
-cd BusinessCardSiteBackendDemo
+cd BusinessCardSiteBackend
 ```
 3. Create a database and update the connection string in the appsettings.json file:
 ```JSON

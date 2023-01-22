@@ -1,7 +1,7 @@
-﻿using BusinessCardSiteBackendDemo.Models;
+using BusinessCardSiteBackend.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace BusinessCardSiteBackendDemo.Data
+namespace BusinessCardSiteBackend.Data
 {
     public class ApplicationDbContext : DbContext
     {

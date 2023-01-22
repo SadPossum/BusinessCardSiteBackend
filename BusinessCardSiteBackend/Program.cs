@@ -1,5 +1,5 @@
-using BusinessCardSiteBackendDemo.Data;
-using BusinessCardSiteBackendDemo.Repositories;
+using BusinessCardSiteBackend.Data;
+using BusinessCardSiteBackend.Repositories;
 using Microsoft.EntityFrameworkCore;
 using NLog.Web;
 

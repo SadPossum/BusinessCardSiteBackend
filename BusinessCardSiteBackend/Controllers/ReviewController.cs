@@ -1,8 +1,8 @@
-﻿using BusinessCardSiteBackendDemo.Models;
-using BusinessCardSiteBackendDemo.Repositories;
+using BusinessCardSiteBackend.Models;
+using BusinessCardSiteBackend.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
-namespace BusinessCardSiteBackendDemo.Controllers
+namespace BusinessCardSiteBackend.Controllers
 {
     [Route("[controller]")]
     [ApiController]

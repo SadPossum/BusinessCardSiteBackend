@@ -1,8 +1,8 @@
-﻿using BusinessCardSiteBackendDemo.Data;
-using BusinessCardSiteBackendDemo.Models;
+using BusinessCardSiteBackend.Data;
+using BusinessCardSiteBackend.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace BusinessCardSiteBackendDemo.Repositories
+namespace BusinessCardSiteBackend.Repositories
 {
     public class ReviewRepository : IReviewRepository
     {
