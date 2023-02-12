@@ -1,9 +1,12 @@
+using System.Reflection;
+using BusinessCardSiteBackend;
 using BusinessCardSiteBackend.Data;
 using BusinessCardSiteBackend.Repositories;
+using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using NLog.Web;
 
-var builder = WebApplication.CreateBuilder(args);
+WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 builder.Host.UseNLog();
 
@@ -14,22 +17,26 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 builder.Services.AddCors();
 
-builder.Services.AddScoped<IReviewRepository, ReviewRepository>();
 builder.Services.AddScoped<ApplicationDbContext>();
+builder.Services.AddScoped<IReviewRepository, ReviewRepository>();
 
 builder.Services.AddControllers();
 
-var app = builder.Build();
+builder.Services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+
+WebApplication app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
-  app.UseDeveloperExceptionPage();
+    app.UseDeveloperExceptionPage();
 }
 
 app.UseCors(p => p.AllowAnyOrigin()
     .AllowAnyHeader()
     .AllowAnyMethod()
     .WithExposedHeaders("Content-Disposition"));
+
+app.UseMiddleware<CustomExceptionMiddleware>();
 
 // app.UseHttpsRedirection();
 
@@ -39,7 +46,7 @@ app.UseAuthorization();
 
 app.UseEndpoints(endpoints =>
 {
-  endpoints.MapControllers();
+    endpoints.MapControllers();
 });
 
 app.Run();

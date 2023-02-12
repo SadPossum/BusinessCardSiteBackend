@@ -1,5 +1,7 @@
 using BusinessCardSiteBackend.Data;
-using BusinessCardSiteBackend.Models;
+using BusinessCardSiteBackend.Extensions;
+using BusinessCardSiteBackend.Models.DataModels;
+using BusinessCardSiteBackend.Models.LogicModels;
 using Microsoft.EntityFrameworkCore;
 
 namespace BusinessCardSiteBackend.Repositories
@@ -15,16 +17,43 @@ namespace BusinessCardSiteBackend.Repositories
             _logger = logger;
         }
 
-        public async Task<Review?> GetReviewAsync(int id)
-        {
-            _logger.LogInformation("Retrieving review with id {0}", id);
-            return await _context.Reviews.FindAsync(id);
-        }
-
-        public async Task<IEnumerable<Review?>> GetAllReviewsAsync()
+        public async Task<(IEnumerable<Review> Entries, int Count, int TotalCount)> GetReviewsAsync(
+            string? authorNameSearch = null,
+            PaginationFilter? paginationFilter = null,
+            List<SortCriteria>? sortCriterias = null)
         {
             _logger.LogInformation("Retrieving all reviews");
-            return await _context.Reviews.ToListAsync();
+
+            IQueryable<Review> query = _context.Reviews.AsQueryable();
+            int totalCount = await _context.Reviews.CountAsync();
+
+            if (authorNameSearch != null)
+            {
+                query = query.Where(a => a.AuthorName.Contains(authorNameSearch));
+            }
+
+            if (paginationFilter != null)
+            {
+                query = query
+                    .Skip((paginationFilter.PageNumber - 1) * paginationFilter.PageSize)
+                    .Take(paginationFilter.PageSize);
+            }
+
+            if (sortCriterias != null)
+            {
+                query = query.SortBy(sortCriterias);
+            }
+
+            int count = await query.CountAsync();
+
+            IEnumerable<Review> entries = await query.ToListAsync();
+            return (entries, count, totalCount);
+        }
+
+        public async Task<Review?> GetReviewAsync(int id)
+        {
+            _logger.LogInformation($"Retrieving review with id {id}");
+            return await _context.Reviews.FindAsync(id);
         }
 
         public async Task<int> AddReviewAsync(Review review)
@@ -37,7 +66,7 @@ namespace BusinessCardSiteBackend.Repositories
 
         public async Task<int> UpdateReviewAsync(Review review)
         {
-            _logger.LogInformation("Updating review with id {0}", review.Id);
+            _logger.LogInformation($"Updating review with id {review.Id}");
             _context.Entry(review).State = EntityState.Modified;
             await _context.SaveChangesAsync();
             return review.Id;
@@ -45,8 +74,8 @@ namespace BusinessCardSiteBackend.Repositories
 
         public async Task DeleteReviewAsync(int id)
         {
-            _logger.LogInformation("Deleting review with id {0}", id);
-            var review = await _context.Reviews.FindAsync(id);
+            _logger.LogInformation($"Deleting review with id {id}");
+            Review? review = await _context.Reviews.FindAsync(id);
             if (review != null)
             {
                 _context.Reviews.Remove(review);

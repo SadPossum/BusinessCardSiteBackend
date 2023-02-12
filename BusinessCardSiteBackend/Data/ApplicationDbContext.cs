@@ -1,4 +1,4 @@
-using BusinessCardSiteBackend.Models;
+using BusinessCardSiteBackend.Models.DataModels;
 using Microsoft.EntityFrameworkCore;
 
 namespace BusinessCardSiteBackend.Data
