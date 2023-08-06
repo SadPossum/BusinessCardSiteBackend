@@ -13,7 +13,7 @@ To install the application, follow these steps:
 
 1. Clone the repository:
 ```sh
-git clone https://github.com/YOUR_USERNAME/BusinessCardSiteBackend.git
+git clone https://github.com/SadPossum/BusinessCardSiteBackend.git
 ```
 2. Navigate to the project directory:
 ```sh
